@@ -1,0 +1,76 @@
+.intro__section {
+     width: 100%;
+     height: 100vh;
+     background-size: cover;
+     background-repeat: no-repeat;
+     background-image: url("https://cdn.pixabay.com/photo/2016/11/23/15/20/pineapples-1853466_960_720.jpg");
+}
+.intro-img {
+     position: relative;
+     width: 100%;
+     height: 100%;
+     background-size: cover;
+     background-repeat: no-repeat;
+     background-attachment: fixed;
+     animation: slider 20s infinite;
+     border-radius: 50px;
+     border: solid 3px white;
+}
+@keyframes slider {
+     0% {
+          transform: scale(1);
+          background-image: url(https://cdn.pixabay.com/photo/2016/02/04/22/45/strawberry-1180048_960_720.jpg);
+          transition: 4s;
+     }
+     10% {
+          transform: scale(1, 1);
+          background-image: url(https://cdn.pixabay.com/photo/2016/02/04/22/45/strawberry-1180048_960_720.jpg);
+          transition: 4s;
+     }
+     20% {
+          transform: scale(1, 1);
+          background-image: url(https://cdn.pixabay.com/photo/2016/02/04/22/45/strawberry-1180048_960_720.jpg);
+          transition: 4s;
+     }
+     30% {
+          transform: scale(1);
+          background-image: url(https://cdn.pixabay.com/photo/2016/08/12/22/38/apple-1589874_960_720.jpg);
+          transition: 4s;
+     }
+     40% {
+          transform: scale(1, 1);
+          background-image: url(https://cdn.pixabay.com/photo/2016/08/12/22/38/apple-1589874_960_720.jpg);
+
+          transition: 4s;
+     }
+     50% {
+          transform: scale(1, 1);
+          background-image: url(https://cdn.pixabay.com/photo/2016/08/12/22/38/apple-1589874_960_720.jpg);
+          transition: 4s;
+     }
+     60% {
+          transform: scale(1);
+          background-image: url(https://cdn.pixabay.com/photo/2016/08/12/22/38/apple-1589874_960_720.jpg);
+          transition: 4s;
+     }
+     70% {
+          transform: scale(1, 1);
+          background-image: url(https://cdn.pixabay.com/photo/2016/07/21/09/04/apple-1532055_960_720.jpg);
+          transition: 4s;
+     }
+     80% {
+          transform: scale(1, 1);
+          background-image: url(https://cdn.pixabay.com/photo/2016/07/21/09/04/apple-1532055_960_720.jpg);
+          transition: 4s;
+     }
+     90% {
+          transform: scale(1);
+          background-image: url(https://cdn.pixabay.com/photo/2016/07/21/09/04/apple-1532055_960_720.jpg);
+          transition: 4s;
+     }
+     100% {
+          transform: scale(1, 1);
+          background-image: url(https://cdn.pixabay.com/photo/2016/02/04/22/45/strawberry-1180048_960_720.jpg);
+          transition: 4s;
+     }
+}

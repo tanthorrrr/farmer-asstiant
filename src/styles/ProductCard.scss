@@ -1,0 +1,48 @@
+.avatar-user {
+     display: flex;
+     align-items: center;
+     column-gap: 8px;
+     cursor: pointer;
+     position: relative;
+     img {
+          width: 2rem;
+          height: 2rem;
+     }
+
+     p {
+          position: absolute;
+          color: rgba(0, 0, 0, 0.799);
+          top: 5px;
+          left: 40px;
+          i {
+               position: absolute;
+               top: -3px;
+               color: yellow;
+               font-size: 1.2rem;
+          }
+     }
+}
+.product__name {
+     margin-top: -10px;
+     font-size: 1.4rem;
+}
+.price {
+     color: rgba(255, 0, 0, 0.785);
+     font-weight: 600;
+}
+.product__img {
+     img {
+          width: 306px;
+          height: 204px;
+          object-fit: cover;
+     }
+}
+.product__info {
+     position: relative;
+     i {
+          position: absolute;
+          right: 0;
+          font-size: 1.5rem;
+          bottom: 8px;
+     }
+}
