@@ -7,9 +7,20 @@ import "../../../styles/Home.scss";
 import FeaturePostList from "../../../components/UI/FeaturePostList";
 import ProductList from "../../../components/UI/ProductList";
 import Introduce from "../../../components/UI/Introduce";
-import products from "../../../assets/data/products";
-
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { listProduct } from "../../../redux/Actions/ProductAction";
+import Loading from "../../../components/LoadingError/Loading";
+import Message from "../../../components/LoadingError/Error";
 const Home = () => {
+     const dispatch = useDispatch();
+     const productList = useSelector((state) => state.productList);
+     const { loading, error, products } = productList;
+
+     useEffect(() => {
+          dispatch(listProduct());
+     }, [dispatch]);
+     // console.log(products);
      const filteredProductOd = products.filter((item) => item.type === "ondoi");
      const filteredProductNd = products.filter((item) => item.type === "nhietdoi");
      return (
@@ -67,10 +78,18 @@ const Home = () => {
                               <Col lg="12" className="text-center mb-5">
                                    <h2 className="section__title">Trái Cây Ôn Đới</h2>
                               </Col>
-                              <ProductList data={filteredProductOd} />
+                              {loading ? (
+                                   <div className="mb-5">
+                                        <Loading />
+                                   </div>
+                              ) : error ? (
+                                   <Message variant="alert-danger">{error}</Message>
+                              ) : (
+                                   <ProductList data={filteredProductOd} />
+                              )}
                               <div className="d-flex  justify-content-center">
                                    <motion.button whileTap={{ scale: 1.1 }} className="shop__btn">
-                                        <Link to="/product">Xem Thêm</Link>
+                                        <Link to="/products">Xem Thêm</Link>
                                    </motion.button>
                               </div>
                          </Row>
@@ -82,10 +101,18 @@ const Home = () => {
                               <Col lg="12" className="text-center mb-5">
                                    <h2 className="section__title">Trái Cây Nhiệt Đới</h2>
                               </Col>
-                              <ProductList data={filteredProductNd} />
+                              {loading ? (
+                                   <div className="mb-5">
+                                        <Loading />
+                                   </div>
+                              ) : error ? (
+                                   <Message variant="alert-danger">{error}</Message>
+                              ) : (
+                                   <ProductList data={filteredProductNd} />
+                              )}
                               <div className="d-flex  justify-content-center">
                                    <motion.button whileTap={{ scale: 1.1 }} className="shop__btn">
-                                        <Link to="/product">Xem Thêm</Link>
+                                        <Link to="/products">Xem Thêm</Link>
                                    </motion.button>
                               </div>
                          </Row>

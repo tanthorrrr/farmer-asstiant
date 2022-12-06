@@ -14,13 +14,13 @@
                position: absolute;
                display: flex;
                color: white;
-               font-size: 9rem;
+               font-size: 12rem;
                font-weight: 700;
                transform: rotate(-90deg);
                height: auto;
                width: auto;
-               right: -250px;
-               bottom: 250px;
+               right: -375px;
+               bottom: 220px;
           }
      }
      .login_right {
@@ -29,112 +29,134 @@
           position: relative;
           overflow: hidden;
           float: left;
+          background-color: #e8eae0;
 
           .title-right {
                position: absolute;
                display: flex;
-               color: green;
-               font-size: 9rem;
+               color: #637a30;
+               font-size: 12rem;
                font-weight: 700;
                transform: rotate(-90deg);
                height: auto;
                width: auto;
-               left: -270px;
-               bottom: 250px;
+               left: -385px;
+               bottom: 220px;
           }
-          .auth__form {
-               position: relative;
-               width: 500px;
-               height: auto;
-               padding: 30px 20px;
-               margin: 150px auto;
-
-               background-color: rgba(153, 153, 153, 0.121);
-               h3 {
-                    font-size: 3rem;
-                    position: absolute;
-                    top: -46px;
-               }
-               .group-input {
-                    position: relative;
-                    .form-input {
-                         border: 1px solid #eee;
-                         border-radius: 4px;
-                         width: 100%;
-                         padding: 6px 20px;
-                         transition: 0.25s ease;
-
-                         &:not(:placeholder-shown) {
-                              & + .form-label {
-                                   top: 0;
-                                   left: 11px;
-                                   padding: 0 10px;
-                                   display: inline-block;
-                                   background-color: white;
-                                   color: var(--primary-color);
-                              }
-                         }
-                         &:focus {
-                              border-color: var(--primary-color);
-                              & + .form-label {
-                                   top: 0;
-                                   left: 11px;
-                                   padding: 0 10px;
-                                   display: inline-block;
-                                   background-color: white;
-                                   color: var(--primary-color);
-                              }
-                         }
-                    }
-                    .form-label {
-                         position: absolute;
-                         top: 50%;
-                         transform: translateY(-50%);
-                         left: 21px;
-                         user-select: none;
-                         pointer-events: none;
-                         transition: 0.25s ease;
-                         color: #999;
-                    }
-                    .btn {
-                         width: 45%;
-                         background-color: white;
-                         border-radius: 20px;
-                         border: 1px solid var(--primary-color);
-                         margin: 0 10px;
-                         font-size: 1rem;
-                         font-weight: 500;
-                         & + .btn {
-                              background-color: #637a30;
-                              color: white;
-                         }
-                    }
-               }
-               .btn-links {
-                    width: 90%;
-                    padding: 10px 10px;
-                    border-radius: 20px;
-                    margin: 5px 10px;
-               }
-          }
-          .btn-links {
-               width: 90%;
-               padding: 10px 10px;
+          .login__container {
+               position: absolute;
+               width: 400px;
+               height: 500px;
+               top: 0;
+               left: 0;
+               bottom: 0;
+               right: 0;
+               margin: auto;
+               background-color: white;
                border-radius: 20px;
-               margin: 5px 20px;
-          }
-          .connect-fb {
-               background-color: #405a93;
-               color: white;
-               font-size: 1rem;
-               font-weight: 500;
-          }
-          .connect-gg {
-               color: var(--primary-color);
-               font-size: 1rem;
-               border: 1px solid var(--primary-color);
-               font-weight: 500;
-               margin-bottom: 10px;
+               .login__content {
+                    padding: 20px;
+
+                    .form__group {
+                         position: relative;
+                         margin: 10px 0;
+                         .form-input {
+                              border: 1px solid #eee;
+                              border-radius: 4px;
+                              width: 100%;
+                              padding: 8px 20px;
+                              transition: 0.25s ease;
+
+                              &:not(:placeholder-shown) {
+                                   & + .form-label {
+                                        top: 0;
+                                        left: 11px;
+                                        padding: 0 10px;
+                                        display: inline-block;
+                                        background-color: white;
+
+                                        color: black;
+                                   }
+                              }
+                              &:focus {
+                                   border-color: black;
+                                   & + .form-label {
+                                        top: 0;
+                                        left: 14px;
+                                        padding: 0 10px;
+                                        display: inline-block;
+                                        background-color: white;
+                                        color: black;
+                                   }
+                              }
+                         }
+                         .form-label {
+                              position: absolute;
+                              top: 50%;
+                              transform: translateY(-50%);
+                              left: 21px;
+                              user-select: none;
+                              pointer-events: none;
+                              transition: 0.25s ease;
+                              color: #999;
+                         }
+                    }
+                    .login-btn {
+                         height: 40px;
+                         width: 100%;
+                         border: none;
+                         outline: none;
+                         margin: 10px 0;
+                         border-radius: 3px;
+                         color: white;
+                         font-weight: 500;
+                         font-size: 1.2rem;
+                         background-color: #637a30;
+                         cursor: pointer;
+                    }
+                    .forgot__password {
+                         font-size: 14px;
+                         cursor: pointer;
+                    }
+                    .social-login {
+                         display: flex;
+                         justify-content: center;
+                         text-align: center;
+                         margin-top: 10px;
+                         .google {
+                              font-size: 30px;
+                              color: white;
+                              background: rgb(188, 9, 33);
+                              border-radius: 50%;
+                              height: 40px;
+                              width: 40px;
+                              display: flex;
+                              justify-content: center;
+                              align-items: center;
+                              margin-right: 10px;
+                              cursor: pointer;
+                         }
+                         .facebook {
+                              font-size: 30px;
+                              color: white;
+                              background: rgb(54, 54, 145);
+                              border-radius: 50%;
+                              height: 40px;
+                              width: 40px;
+                              display: flex;
+                              justify-content: center;
+                              align-items: center;
+                              margin-bottom: 10px;
+                              cursor: pointer;
+                         }
+                    }
+                    .log__register {
+                         font-size: 1rem;
+                         a {
+                              text-decoration: none;
+                         }
+                    }
+               }
           }
      }
 }

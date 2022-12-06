@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { login } from "../redux/Actions/UserActions";
 import Loading from "../components/LoadingError/Loading";
 
-const Login = () => {
+const ForgotPassword = () => {
      const history = useNavigate();
      const location = useLocation();
      const [email, setEmail] = useState("");
@@ -126,7 +126,7 @@ const Login = () => {
                                                             : "/register"
                                                   }
                                              >
-                                                  Sign Up
+                                                  Log Register
                                              </Link>
                                         </span>
                                    </div>
@@ -138,4 +138,4 @@ const Login = () => {
      );
 };
 
-export default Login;
+export default ForgotPassword;

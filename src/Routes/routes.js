@@ -8,6 +8,9 @@ import Feedback from "../pages/User/Feedback";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import ProductDetail from "../pages/User/ProductDetail/ProductDetail";
+import DashBoard from "../pages/Admin/DashBoard";
+import ForgotPassword from "../pages/ForgotPasswod";
+import Profile from "../pages/User/Profile/Profile";
 
 //public Routes
 const publicRoutes = [
@@ -37,6 +40,11 @@ const publicRoutes = [
           layout: null,
      },
      {
+          path: config.routes.resetPassword,
+          component: ForgotPassword,
+          layout: null,
+     },
+     {
           path: config.routes.register,
           component: Register,
           layout: null,
@@ -46,7 +54,20 @@ const publicRoutes = [
           component: ProductDetail,
           layout: DefaultLayout,
      },
+     {
+          path: config.routes.profile,
+          component: Profile,
+          layout: DefaultLayout,
+     },
 ];
-const privateRoutes = [{}];
+const privateRoutes = [
+     {
+          path: config.routes.dashboard,
+          pathDefault: config.routes.home,
+          component: DashBoard,
+          componentDefaut: Home,
+          layout: DefaultLayout,
+     },
+];
 
 export { publicRoutes, privateRoutes };

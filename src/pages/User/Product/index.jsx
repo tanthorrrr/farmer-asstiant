@@ -4,15 +4,28 @@ import { Container, Row, Col } from "reactstrap";
 import "../../../styles/product.scss";
 import Helmet from "../../../layouts/components/Helmet/Helmet";
 import CommonSection from "../../../layouts/components/CommonSection";
-import products from "../../../assets/data/products";
 import ProductList from "../../../components/UI/ProductList";
+import { useDispatch, useSelector } from "react-redux";
+import { listProduct } from "../../../redux/Actions/ProductAction";
+import Loading from "../../../components/LoadingError/Loading";
+import Message from "../../../components/LoadingError/Error";
+import { useEffect } from "react";
+
 const Product = () => {
-     const [productsData, setProductsData] = useState(products);
+     const dispatch = useDispatch();
+     const productList = useSelector((state) => state.productList);
+     const { loading, error, products } = productList;
+     const producstDefault = products;
+     const [productsData, setProductsData] = useState(producstDefault);
+
+     useEffect(() => {
+          dispatch(listProduct());
+     }, [dispatch]);
+
      const handleFilter = (e) => {
           const filterValue = e.target.value;
           if (filterValue === "all") {
-               const filteredProduct = products;
-               setProductsData(filteredProduct);
+               setProductsData(products);
           }
           if (filterValue === "nhietdoi") {
                const filteredProduct = products.filter((item) => item.type === "nhietdoi");
@@ -27,13 +40,24 @@ const Product = () => {
                setProductsData(filteredProduct);
           }
      };
+
      const handleSearch = (e) => {
           const searchItem = e.target.value;
           const searchedProduct = products.filter((item) =>
-               item.productName.toLowerCase().includes(searchItem.toLowerCase())
+               item.name.toLowerCase().includes(searchItem.toLowerCase())
           );
           setProductsData(searchedProduct);
      };
+     // const sortProduct = (e) => {
+     //      const sortItem = e.target.value;
+     //      if (sortItem === "Ascending") {
+     //           const sortProductItem = products._id.sort(compareValues("price", "desc"));
+     //           console.log(sortProductItem);
+     //      }
+     //      if (sortItem === "Descending") {
+     //           setProductsData(productsData.sort(compareValues("price")));
+     //      }
+     // };
      return (
           <Helmet title="Products">
                <CommonSection title="Products" />
@@ -55,8 +79,8 @@ const Product = () => {
                               <Col lg="3" md="6" className="text-end">
                                    <div className="filter__widget">
                                         <select>
-                                             <option>-- Sắp xếp theo giá --</option>
-                                             <option value="ascending">Cao đến thấp</option>
+                                             <option value="all">-- Sắp xếp theo giá --</option>
+                                             <option value="Ascending">Cao đến thấp</option>
                                              <option value="Descending">Thấp đến cao</option>
                                         </select>
                                    </div>
@@ -78,13 +102,23 @@ const Product = () => {
                </section>
                <section className="pt-0 ">
                     <Container>
-                         <Row>
-                              {productsData.length === 0 ? (
-                                   <h1 className="text-center fs-4">No Products are found!</h1>
-                              ) : (
-                                   <ProductList data={productsData} />
-                              )}
-                         </Row>
+                         {loading ? (
+                              <div className="mb-5">
+                                   <Loading />
+                              </div>
+                         ) : error ? (
+                              <Message variant="alert-danger">{error}</Message>
+                         ) : (
+                              <Row>
+                                   {productsData.length === 0 ? (
+                                        <h1 className="text-center fs-4">
+                                             Không có sản phẩm nào !
+                                        </h1>
+                                   ) : (
+                                        <ProductList data={productsData} />
+                                   )}
+                              </Row>
+                         )}
                     </Container>
                </section>
           </Helmet>

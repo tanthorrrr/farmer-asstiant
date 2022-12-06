@@ -1,53 +1,205 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { Form, FormGroup } from "reactstrap";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import Loading from "../components/LoadingError/Loading";
+import { register } from "../redux/Actions/UserActions";
+
+import "react-datepicker/dist/react-datepicker.css";
+
 import "../styles/register.scss";
 
 const Register = () => {
+     const history = useNavigate();
+     const location = useLocation();
+     const [firstname, setFirstName] = useState("");
+     const [lastname, setLastName] = useState("");
+     const [phonenumber, setPhoneNumber] = useState("");
+     const [email, setEmail] = useState("");
+     const [idRole, setIdRole] = useState("");
+     const [password, setPassword] = useState("");
+     const [cfpassword, setCfPasswod] = useState("");
+
+     const [isShowPassword, setIsShowPassword] = useState(true);
+     const dispatch = useDispatch();
+     const handleShowPassword = () => {
+          let x = document.getElementById("myPassword");
+          if (x.type === "password") {
+               setIsShowPassword(false);
+          } else {
+               setIsShowPassword(true);
+          }
+     };
+     const redirect = location.search ? location.search.split("=")[1] : "/";
+     const userRegister = useSelector((state) => state.userRegister);
+     const { error, loading, userInfo } = userRegister;
+
+     useEffect(() => {
+          if (userInfo) {
+               if (userInfo.idRole !== 1) {
+                    history(redirect);
+               }
+               if (userInfo.idRole === 1) {
+                    history("/");
+               }
+          }
+     }, [userInfo, history, redirect]);
+     const handlerOptione = (e) => {
+          const option = e.target.value;
+
+          if (option === "3") {
+               setIdRole("3");
+          }
+          if (option === "2") {
+               setIdRole("2");
+          }
+          console.log(idRole);
+     };
+     const submitHandler = (e) => {
+          e.preventDefault();
+          dispatch(register(firstname, lastname, email, phonenumber, idRole, password));
+     };
+
      return (
           <div className="form-register">
                <div>
                     <div className="login_left">
-                         <div className="title-left">SIGN UP</div>
+                         <div className="title-left">SIGN UP </div>
                     </div>
                     <div className="login_right">
-                         <div className="title-right">SIGN UP</div>
+                         <div className="title-right">SIGN UP </div>
 
-                         <Form className="auth__form">
-                              <h3 className="fw-bold mb-4 text-center">Sign up</h3>
+                         <form onSubmit={submitHandler} className="login__container">
+                              {/* {error && <Message variant="alert-danger">{error}</Message>} */}
+                              {loading && <Loading />}
+                              <div className="login__content row">
+                                   <div className="col-12 text-center fw-bold fs-1 mb-4">
+                                        Register
+                                   </div>
 
-                              <FormGroup className="group-input">
-                                   <input type="text" className="form-input" placeholder=" " />
-                                   <label className="form-label">User Name</label>
-                              </FormGroup>
-                              <FormGroup className="group-input">
-                                   <input type="email" className="form-input" placeholder=" " />
-                                   <label className="form-label">Email</label>
-                              </FormGroup>
-                              <FormGroup className="group-input">
-                                   <input type="password" className="form-input" placeholder=" " />
-                                   <label className="form-label">Password</label>
-                              </FormGroup>
-                              <FormGroup className="group-input">
-                                   <input type="password" className="form-input" placeholder=" " />
-                                   <label className="form-label">Confirm Password</label>
-                              </FormGroup>
-                              <FormGroup className="group-input">
-                                   <button className="btn change-btn">Change Method</button>
-                                   <button className="btn create-btn">Create Account</button>
-                              </FormGroup>
-                              <button className="btn-links connect-fb">
-                                   <i className="ri-facebook-fill"></i> Sign up with facebook
-                              </button>
-                              <button className="btn-links connect-gg">
-                                   <i className="ri-google-fill"></i> Sign up with google
-                              </button>
+                                   <div className="col-7 form__group">
+                                        <input
+                                             type="text"
+                                             className="form-input"
+                                             placeholder=" "
+                                             value={firstname}
+                                             onChange={(e) => setFirstName(e.target.value)}
+                                        />
+                                        <label className="form-label">First Name</label>
+                                   </div>
+                                   <div className="col-5 form__group">
+                                        <input
+                                             type="text"
+                                             className="form-input"
+                                             placeholder=" "
+                                             value={lastname}
+                                             onChange={(e) => setLastName(e.target.value)}
+                                        />
+                                        <label className="form-label">Last Name</label>
+                                   </div>
 
-                              <p className="text-center ">
-                                   Already have an account?
-                                   <Link to="/login"> Login</Link>
-                              </p>
-                         </Form>
+                                   <div className="col-12 form__group">
+                                        <input
+                                             type="email"
+                                             className="form-input"
+                                             placeholder=" "
+                                             value={email}
+                                             onChange={(e) => setEmail(e.target.value)}
+                                        />
+                                        <label className="form-label">Email</label>
+                                   </div>
+                                   <div className="col-8 form__group">
+                                        <input
+                                             type="tel"
+                                             className="form-input"
+                                             placeholder=" "
+                                             value={phonenumber}
+                                             onChange={(e) => setPhoneNumber(e.target.value)}
+                                        />
+                                        <label className="form-label">Phone Number</label>
+                                   </div>
+                                   <div className="col-4 form__group">
+                                        <select className="idRole" onChange={handlerOptione}>
+                                             <option>---Your Are---</option>
+                                             <option value="2"> Farmer </option>
+                                             <option value="3"> Trader </option>
+                                        </select>
+                                   </div>
+                                   <div className="col-12 form__group">
+                                        <div className="custom-input-password">
+                                             <input
+                                                  id="myPassword"
+                                                  type={isShowPassword ? "password" : "text"}
+                                                  className="form-input"
+                                                  placeholder=" "
+                                                  value={password}
+                                                  onChange={(e) => setPassword(e.target.value)}
+                                             />
+                                             <label className="form-label">Password</label>
+                                        </div>
+                                   </div>
+                                   <div className="col-12 form__group">
+                                        <div className="custom-input-password">
+                                             <input
+                                                  id="myPassword"
+                                                  type={isShowPassword ? "password" : "text"}
+                                                  className="form-input"
+                                                  placeholder=" "
+                                                  value={cfpassword}
+                                                  onChange={(e) => setCfPasswod(e.target.value)}
+                                             />
+                                             <label className="form-label">Confirm Password</label>
+                                        </div>
+                                   </div>
+
+                                   {error && (
+                                        <div className="col-12" style={{ color: "red" }}>
+                                             {error}
+                                        </div>
+                                   )}
+                                   <div className="col-12">
+                                        <input
+                                             type="checkbox"
+                                             onClick={() => {
+                                                  handleShowPassword();
+                                             }}
+                                        />
+                                        <span> Show password</span>
+                                   </div>
+                                   <div className="col-12">
+                                        <button
+                                             className="login-btn"
+                                             type="submit"
+                                             // onClick={() => {
+                                             //      this.handleLogin();
+                                             // }}
+                                        >
+                                             Register
+                                        </button>
+                                   </div>
+
+                                   <div className="col-12 text-center">
+                                        <span className="">Or Login with:</span>
+                                   </div>
+                                   <div className="col-12 social-login ">
+                                        <i className=" ri-google-fill google  "></i>
+                                        <i className="ri-facebook-fill facebook"></i>
+                                   </div>
+                                   <div className="col-12 text-center">
+                                        <span className="log__register">
+                                             Already have an account ?
+                                             <Link
+                                                  to={
+                                                       redirect
+                                                            ? `/login?redirect=${redirect}`
+                                                            : "/login"
+                                                  }
+                                             >
+                                                  Sign In
+                                             </Link>
+                                        </span>
+                                   </div>
+                              </div>
+                         </form>
                     </div>
                </div>
           </div>
