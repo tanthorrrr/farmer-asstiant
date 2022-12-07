@@ -54,6 +54,9 @@ const Register = () => {
           }
           console.log(idRole);
      };
+     //logic check lỗi
+
+     // hàm submit nhập vào
      const submitHandler = (e) => {
           e.preventDefault();
           dispatch(register(firstname, lastname, email, phonenumber, idRole, password));
