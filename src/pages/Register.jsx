@@ -73,7 +73,7 @@ const Register = () => {
                               {loading && <Loading />}
                               <div className="login__content row">
                                    <div className="col-12 text-center fw-bold fs-1 mb-4">
-                                        Register
+                                        Đăng Ký
                                    </div>
 
                                    <div className="col-7 form__group">
@@ -84,7 +84,7 @@ const Register = () => {
                                              value={firstname}
                                              onChange={(e) => setFirstName(e.target.value)}
                                         />
-                                        <label className="form-label">First Name</label>
+                                        <label className="form-label">Họ </label>
                                    </div>
                                    <div className="col-5 form__group">
                                         <input
@@ -94,7 +94,7 @@ const Register = () => {
                                              value={lastname}
                                              onChange={(e) => setLastName(e.target.value)}
                                         />
-                                        <label className="form-label">Last Name</label>
+                                        <label className="form-label">Tên</label>
                                    </div>
 
                                    <div className="col-12 form__group">
@@ -115,13 +115,13 @@ const Register = () => {
                                              value={phonenumber}
                                              onChange={(e) => setPhoneNumber(e.target.value)}
                                         />
-                                        <label className="form-label">Phone Number</label>
+                                        <label className="form-label">Số điện thoại</label>
                                    </div>
                                    <div className="col-4 form__group">
                                         <select className="idRole" onChange={handlerOptione}>
-                                             <option>---Your Are---</option>
-                                             <option value="2"> Farmer </option>
-                                             <option value="3"> Trader </option>
+                                             <option>--- Bạn là ---</option>
+                                             <option value="2"> Nông dân </option>
+                                             <option value="3"> Thương lái </option>
                                         </select>
                                    </div>
                                    <div className="col-12 form__group">
@@ -134,7 +134,7 @@ const Register = () => {
                                                   value={password}
                                                   onChange={(e) => setPassword(e.target.value)}
                                              />
-                                             <label className="form-label">Password</label>
+                                             <label className="form-label">Mật Khẩu</label>
                                         </div>
                                    </div>
                                    <div className="col-12 form__group">
@@ -147,7 +147,9 @@ const Register = () => {
                                                   value={cfpassword}
                                                   onChange={(e) => setCfPasswod(e.target.value)}
                                              />
-                                             <label className="form-label">Confirm Password</label>
+                                             <label className="form-label">
+                                                  Xác Nhận Lại Mật Khẩu
+                                             </label>
                                         </div>
                                    </div>
 
@@ -163,7 +165,7 @@ const Register = () => {
                                                   handleShowPassword();
                                              }}
                                         />
-                                        <span> Show password</span>
+                                        <span> Hiển Thị Mật Khẩu</span>
                                    </div>
                                    <div className="col-12">
                                         <button
@@ -173,12 +175,12 @@ const Register = () => {
                                              //      this.handleLogin();
                                              // }}
                                         >
-                                             Register
+                                             Đăng Ký
                                         </button>
                                    </div>
 
                                    <div className="col-12 text-center">
-                                        <span className="">Or Login with:</span>
+                                        <span className="">Có thể đăng nhập bằng :</span>
                                    </div>
                                    <div className="col-12 social-login ">
                                         <i className=" ri-google-fill google  "></i>
@@ -186,7 +188,7 @@ const Register = () => {
                                    </div>
                                    <div className="col-12 text-center">
                                         <span className="log__register">
-                                             Already have an account ?
+                                             Bạn đã có tài khoản ?
                                              <Link
                                                   to={
                                                        redirect
@@ -194,7 +196,7 @@ const Register = () => {
                                                             : "/login"
                                                   }
                                              >
-                                                  Sign In
+                                                  Đăng Nhập
                                              </Link>
                                         </span>
                                    </div>

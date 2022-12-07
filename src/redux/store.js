@@ -6,7 +6,12 @@ import {
      productDetailsReducer,
      productListReducer,
 } from "./Reducers/ProductReducers";
-import { userLoginReducer, useRegisterReducer, userDetailsReducer } from "./Reducers/UserReducers";
+import {
+     userLoginReducer,
+     useRegisterReducer,
+     userDetailsReducer,
+     userListReducer,
+} from "./Reducers/UserReducers";
 
 const reducer = combineReducers({
      productList: productListReducer,
@@ -15,6 +20,7 @@ const reducer = combineReducers({
      userLogin: userLoginReducer,
      userRegister: useRegisterReducer,
      userDetails: userDetailsReducer,
+     userList: userListReducer,
 });
 
 //login

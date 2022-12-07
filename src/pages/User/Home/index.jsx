@@ -8,6 +8,7 @@ import FeaturePostList from "../../../components/UI/FeaturePostList";
 import ProductList from "../../../components/UI/ProductList";
 import Introduce from "../../../components/UI/Introduce";
 import { useEffect } from "react";
+
 import { useDispatch, useSelector } from "react-redux";
 import { listProduct } from "../../../redux/Actions/ProductAction";
 import Loading from "../../../components/LoadingError/Loading";
@@ -20,7 +21,7 @@ const Home = () => {
      useEffect(() => {
           dispatch(listProduct());
      }, [dispatch]);
-     // console.log(products);
+
      const filteredProductOd = products.filter((item) => item.type === "ondoi");
      const filteredProductNd = products.filter((item) => item.type === "nhietdoi");
      return (

@@ -48,16 +48,7 @@ const Product = () => {
           );
           setProductsData(searchedProduct);
      };
-     // const sortProduct = (e) => {
-     //      const sortItem = e.target.value;
-     //      if (sortItem === "Ascending") {
-     //           const sortProductItem = products._id.sort(compareValues("price", "desc"));
-     //           console.log(sortProductItem);
-     //      }
-     //      if (sortItem === "Descending") {
-     //           setProductsData(productsData.sort(compareValues("price")));
-     //      }
-     // };
+
      return (
           <Helmet title="Products">
                <CommonSection title="Products" />

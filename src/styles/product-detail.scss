@@ -34,15 +34,17 @@
 }
 .product__review {
      .review__wrapper {
-          position: relative;
-          padding-left: 50px;
-          img {
-               top: 0;
-               left: 30px;
-               position: absolute;
-               height: 35px;
-               width: 35px;
-               border-radius: 50%;
+          li {
+               padding-left: 70px;
+               position: relative;
+               img {
+                    top: 0;
+                    left: 30px;
+                    position: absolute;
+                    height: 35px;
+                    width: 35px;
+                    border-radius: 50%;
+               }
           }
 
           ul li span {

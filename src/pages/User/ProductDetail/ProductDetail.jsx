@@ -20,7 +20,6 @@ const ProductDetail = ({ match }) => {
      // const { productId } = match.params.id;
      const { id } = useParams();
      const dispatch = useDispatch();
-
      const [tab, setTab] = useState("desc");
      const [rating, setRating] = useState(0);
      const [comment, setComment] = useState("");
@@ -28,6 +27,7 @@ const ProductDetail = ({ match }) => {
      const { loading, error, product } = productDetail;
 
      const userLogin = useSelector((state) => state.userLogin);
+
      const { userInfo } = userLogin;
 
      const productReviewCreate = useSelector((state) => state.productReviewCreate);
@@ -131,7 +131,9 @@ const ProductDetail = ({ match }) => {
                                         <div className="product__review">
                                              <div className="review__wrapper mt-5">
                                                   {product.reviews.length === 0 && (
-                                                       <h4 className="text-center">No review</h4>
+                                                       <h4 className="text-center">
+                                                            Chưa có bình luận nào
+                                                       </h4>
                                                   )}
                                                   <ul>
                                                        {product.reviews?.map((item, index) => (

@@ -52,7 +52,9 @@ const Login = () => {
                               {/* {error && <Message variant="alert-danger">{error}</Message>} */}
                               {loading && <Loading />}
                               <div className="login__content row">
-                                   <div className="col-12 text-center fw-bold fs-1 mb-4">Login</div>
+                                   <div className="col-12 text-center fw-bold fs-1 mb-4">
+                                        Đăng Nhập
+                                   </div>
 
                                    <div className="col-12 form__group">
                                         <input
@@ -75,7 +77,7 @@ const Login = () => {
                                                   onChange={(e) => setPassword(e.target.value)}
                                              />
 
-                                             <label className="form-label">Password</label>
+                                             <label className="form-label">Mật Khẩu</label>
                                         </div>
                                    </div>
 
@@ -91,7 +93,7 @@ const Login = () => {
                                                   handleShowPassword();
                                              }}
                                         />
-                                        <span> Show password</span>
+                                        <span>Hiện Thị Mật Khẩu</span>
                                    </div>
                                    <div className="col-12">
                                         <button
@@ -106,11 +108,11 @@ const Login = () => {
                                    </div>
                                    <div className="col-12">
                                         <Link className="forgot__password" to={"/forgot-password"}>
-                                             Forgot your password?
+                                             Bạn đã quên mật khẩu
                                         </Link>
                                    </div>
                                    <div className="col-12 text-center">
-                                        <span className="">Or Login with:</span>
+                                        <span className="">Có thể đăng nhập bằng :</span>
                                    </div>
                                    <div className="col-12 social-login ">
                                         <i className=" ri-google-fill google  "></i>
@@ -118,15 +120,17 @@ const Login = () => {
                                    </div>
                                    <div className="col-12 text-center">
                                         <span className="log__register">
-                                             Already A Member?
+                                             Bạn Chưa có tài khoản
                                              <Link
                                                   to={
                                                        redirect
                                                             ? `/register?redirect=${redirect}`
                                                             : "/register"
                                                   }
+                                                  className="fw-bold"
                                              >
-                                                  Sign Up
+                                                  {" "}
+                                                  Đăng Ký Tại Đây
                                              </Link>
                                         </span>
                                    </div>
