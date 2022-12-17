@@ -18,7 +18,6 @@ const Introduce = () => {
                          <Col lg="6" md="6">
                               <div className="intro_content">
                                    <h1>FARMERS MARTKETS</h1>
-                                   <h3>FARMERS MARTKETS</h3>
                                    <p>
                                         Đồng hành cùng nhà nông. Với sự thấu hiểu những khó khăn của
                                         nông dân, nơi đây chúng tôi không chỉ là nơi chia sẽ những

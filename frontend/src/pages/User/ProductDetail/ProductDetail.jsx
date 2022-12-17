@@ -3,20 +3,24 @@ import { Container, Row, Col } from "reactstrap";
 import { Link, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
-import Loading from "../../../components/LoadingError/Loading";
-import Message from "../../../components/LoadingError/Error";
-// import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import Rating from "../../../components/UI/Rating";
-import Helmet from "../../../layouts/components/Helmet/Helmet";
-import CommonSection from "../../../layouts/components/CommonSection";
-import "../../../styles/product-detail.scss";
-import { createProductReview, listProductDetail } from "../../../redux/Actions/ProductAction";
-import RalatedProduct from "../../../components/UI/RalatedProduct";
-import { PRODUCT_CREATE_REVIEW_RESET } from "../../../redux/Constants/ProductConstants";
 import moment from "moment";
 
-const ProductDetail = ({ match }) => {
+import Loading from "../../../components/LoadingError/Loading";
+import Message from "../../../components/LoadingError/Error";
+import Rating from "../../../components/UI/Rating";
+import Helmet from "../../../layouts/components/Helmet/Helmet";
+import {
+     createProductReview,
+     listProductDetail,
+     listProduct,
+} from "../../../redux/Actions/ProductAction";
+import { PRODUCT_CREATE_REVIEW_RESET } from "../../../redux/Constants/ProductConstants";
+import { userLists } from "../../../redux/Actions/UserActions";
+import CommonSection from "../../../layouts/components/CommonSection";
+import "../../../styles/product-detail.scss";
+import ProductList from "../../../components/UI/ProductList";
+
+const ProductDetail = () => {
      // const { productId } = match.params.id;
      const { id } = useParams();
      const dispatch = useDispatch();
@@ -24,25 +28,33 @@ const ProductDetail = ({ match }) => {
      const [rating, setRating] = useState(0);
      const [comment, setComment] = useState("");
      const productDetail = useSelector((state) => state.productDetail);
+
      const { loading, error, product } = productDetail;
-
+     const productList = useSelector((state) => state.productList);
+     const { products } = productList;
+     // useEffect(() => {}, [dispatch]);
+     const ralatedProdict = products.filter((item) => item.idUser === product.idUser);
      const userLogin = useSelector((state) => state.userLogin);
-
-     const { userInfo } = userLogin;
-
      const productReviewCreate = useSelector((state) => state.productReviewCreate);
+     const userList = useSelector((state) => state.userList);
+     const { userInfo } = userLogin;
+     const { users } = userList;
      const {
           loading: loadingCreateReview,
           error: errorCreateReview,
           success: successCreateReview,
      } = productReviewCreate;
-
+     useEffect(() => {
+          dispatch(userLists());
+          dispatch(listProduct());
+     }, [dispatch]);
+     const user = users.find((data) => data._id === product.idUser);
      useEffect(() => {
           if (successCreateReview) {
-               alert("Review Submitted");
                setRating(0);
                setComment("");
                dispatch({ type: PRODUCT_CREATE_REVIEW_RESET });
+               window.location.reload();
           }
           dispatch(listProductDetail(id));
      }, [dispatch, id, successCreateReview]);
@@ -52,9 +64,12 @@ const ProductDetail = ({ match }) => {
      useEffect(() => {
           window.scrollTo(0, 0);
      }, [product]);
-     const submitHandler = (e) => {
+     const submitHandler = async (e) => {
           e.preventDefault();
           dispatch(createProductReview(id, { rating, comment }));
+          if (!error && !errorCreateReview) {
+               await window.location.reload();
+          }
      };
 
      return (
@@ -76,6 +91,7 @@ const ProductDetail = ({ match }) => {
                                    <Col lg="6">
                                         <div className="product__details">
                                              <h2>{product.name}</h2>
+
                                              <Rating
                                                   value={product.rating}
                                                   text={` ${product.numReview} reviews`}
@@ -88,16 +104,25 @@ const ProductDetail = ({ match }) => {
                                                   {/* <span>Category: {product.category}</span> */}
                                              </div>
                                              <p className="mt-3">{product.shortDesc}</p>
-                                             {/* <motion.button
-                                             whileTap={{ scale: 1.1 }}
-                                             className="shop__btn"
-                                             onClick={addToCart}
-                                        >
-                                             Add to Cart
-                                        </motion.button> */}
-                                             <div className="sdt">
-                                                  <p>0375583475</p>
-                                                  <p>0375583475</p>
+
+                                             <h6>
+                                                  {" "}
+                                                  có thể liên hệ với{" "}
+                                                  {user && user.firstname + user.lastname} thông qua
+                                                  :
+                                             </h6>
+                                             {/* <img
+                                                  className="avt-cus"
+                                                  src={user && user.avt}
+                                                  alt=""
+                                             /> */}
+                                             <div className="contact">
+                                                  <span className="sdt">
+                                                       {user && user.phonenumber}
+                                                  </span>
+                                                  <span className="email">
+                                                       {user && user.email}
+                                                  </span>
                                              </div>
                                         </div>
                                    </Col>
@@ -130,39 +155,55 @@ const ProductDetail = ({ match }) => {
                                    ) : (
                                         <div className="product__review">
                                              <div className="review__wrapper mt-5">
-                                                  {product.reviews.length === 0 && (
+                                                  {product.reviews !== null &&
+                                                  product.reviews.length === 0 ? (
                                                        <h4 className="text-center">
                                                             Chưa có bình luận nào
                                                        </h4>
-                                                  )}
-                                                  <ul>
-                                                       {product.reviews?.map((item, index) => (
-                                                            <li key={index} className="mb-4">
-                                                                 <img
-                                                                      className="avt-comment "
-                                                                      src={item.image}
-                                                                      alt=""
-                                                                 />
-                                                                 <div className="name-comment">
-                                                                      <h6>
-                                                                           {item.firstname +
-                                                                                " " +
-                                                                                item.lastname}
-                                                                           <span>
-                                                                                {` ${moment(
-                                                                                     item.createdAt
-                                                                                ).calendar()}`}
-                                                                           </span>
-                                                                           <Rating
-                                                                                value={item.rating}
-                                                                           />
-                                                                      </h6>
+                                                  ) : (
+                                                       <ul>
+                                                            {product.reviews !== null &&
+                                                                 product.reviews.map(
+                                                                      (item, index) => (
+                                                                           <li
+                                                                                key={index}
+                                                                                className="mb-4"
+                                                                           >
+                                                                                <img
+                                                                                     className="avt-comment "
+                                                                                     src={
+                                                                                          item.image
+                                                                                     }
+                                                                                     alt=""
+                                                                                />
+                                                                                <div className="name-comment">
+                                                                                     <h6>
+                                                                                          {item.firstname +
+                                                                                               " " +
+                                                                                               item.lastname}
+                                                                                          <span>
+                                                                                               {` ${moment(
+                                                                                                    item.createdAt
+                                                                                               ).calendar()}`}
+                                                                                          </span>
+                                                                                          <Rating
+                                                                                               value={
+                                                                                                    item.rating
+                                                                                               }
+                                                                                          />
+                                                                                     </h6>
 
-                                                                      <p>{item.comment}</p>
-                                                                 </div>
-                                                            </li>
-                                                       ))}
-                                                  </ul>
+                                                                                     <p>
+                                                                                          {
+                                                                                               item.comment
+                                                                                          }
+                                                                                     </p>
+                                                                                </div>
+                                                                           </li>
+                                                                      )
+                                                                 )}
+                                                       </ul>
+                                                  )}
 
                                                   <div className="review__form text-center">
                                                        <h4>Để lại cảm nghĩ của bạn</h4>
@@ -247,7 +288,7 @@ const ProductDetail = ({ match }) => {
                                    <h2 className="related__title">Có thể bạn cũng thích</h2>
                               </Col>
 
-                              <RalatedProduct data={product.type} />
+                              <ProductList data={ralatedProdict} />
                          </Row>
                     </Container>
                </section>

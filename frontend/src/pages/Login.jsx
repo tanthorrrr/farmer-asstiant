@@ -108,7 +108,7 @@ const Login = () => {
                                    </div>
                                    <div className="col-12">
                                         <Link className="forgot__password" to={"/forgot-password"}>
-                                             Bạn đã quên mật khẩu
+                                             Bạn đã quên mật khẩu?
                                         </Link>
                                    </div>
                                    <div className="col-12 text-center">

@@ -16,7 +16,7 @@ const Profile = () => {
                <div className="row">
                     <div className="col-xl-4">
                          <div className="card mb-4 mb-xl-0">
-                              <div className="card-header">Profile Picture</div>
+                              <div className="card-header">Ảnh Đại Diện</div>
                               <div className="card-body text-center">
                                    <img
                                         className="img-account-profile rounded-circle mb-2"
@@ -24,69 +24,79 @@ const Profile = () => {
                                         alt=""
                                    />
                                    <div className="small font-italic text-muted mb-4">
-                                        JPG or PNG no larger than 5 MB
+                                        JPG hoặc PNG không lớn hơn 5 MB
                                    </div>
                                    <button className="btn btn-primary" type="button">
-                                        Upload new image
+                                        Tải lên ảnh mới
                                    </button>
                               </div>
                          </div>
                     </div>
                     <div className="col-xl-8">
                          <div className="card mb-4">
-                              <div className="card-header">Account Details</div>
+                              <div className="card-header">Chi tiết tài khoản</div>
                               <div className="card-body">
                                    <div>
                                         <div className="row gx-3 mb-3">
                                              <div className="col-md-6">
-                                                  <label className="small mb-1">First name</label>
+                                                  <label className="small mb-1">Họ</label>
                                                   <input
                                                        className="form-control"
+                                                       readonly="False"
                                                        id="inputFirstName"
                                                        type="text"
-                                                       placeholder="Enter your first name"
                                                        value={userInfo.firstname}
                                                   />
                                              </div>
 
                                              <div className="col-md-6">
-                                                  <label className="small mb-1">Last name</label>
+                                                  <label className="small mb-1">Tên</label>
                                                   <input
+                                                       readonly="False"
                                                        className="form-control"
                                                        id="inputLastName"
                                                        type="text"
-                                                       placeholder="Enter your last name"
                                                        value={userInfo.lastname}
                                                   />
                                              </div>
                                         </div>
 
                                         <div className="mb-3">
-                                             <label className="small mb-1">Email address</label>
+                                             <label className="small mb-1">Địa chỉ email</label>
                                              <input
                                                   className="form-control"
+                                                  readonly="False"
                                                   id="inputEmailAddress"
                                                   type="email"
-                                                  placeholder="Enter your email address"
                                                   value={userInfo.email}
                                              />
                                         </div>
 
                                         <div className="row gx-3 mb-3">
-                                             <label className="small mb-1">Phone number</label>
+                                             <label className="small mb-1">Số điện thoại</label>
                                              <input
+                                                  readonly="False"
                                                   className="form-control"
                                                   id="inputPhone"
                                                   type="tel"
-                                                  placeholder="Enter your phone number"
                                                   value={userInfo.phonenumber}
                                              />
                                         </div>
+                                        {/* <div className="row gx-3 mb-3">
+                                             <label className="small mb-1">Số điện thoại</label>
+                                             <input
+                                                  readonly="False"
+                                                  className="form-control"
+                                                  id="inputPhone"
+                                                  type="tel"
+                                                  value={userInfo.phonenumber}
+                                             />
+                                        </div> */}
                                    </div>
 
-                                   <button className="btn btn-primary" type="button">
-                                        Save changes
-                                   </button>
+                                   {/* <button className="btn btn-primary" type="button">
+                                        Lưu thay đổi
+                                   </button> */}
                               </div>
                          </div>
                     </div>

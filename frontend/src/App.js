@@ -89,8 +89,8 @@ function App() {
                                      let Page = route.componentDefaut;
 
                                      let Layout = DefaultLayout;
-                                     if (route.layout) {
-                                          Layout = route.layout;
+                                     if (route.layoutDefault) {
+                                          Layout = route.layoutDefault;
                                      } else if (route.layout === null) {
                                           Layout = Fragment;
                                      }

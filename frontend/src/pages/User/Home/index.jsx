@@ -13,12 +13,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { listProduct } from "../../../redux/Actions/ProductAction";
 import Loading from "../../../components/LoadingError/Loading";
 import Message from "../../../components/LoadingError/Error";
+import { listPost } from "../../../redux/Actions/PostActions";
 const Home = () => {
      const dispatch = useDispatch();
      const productList = useSelector((state) => state.productList);
      const { loading, error, products } = productList;
 
+     const postList = useSelector((state) => state.postList);
+     const { posts } = postList;
+     const userLogin = useSelector((state) => state.userLogin);
+     const { userInfo } = userLogin;
      useEffect(() => {
+          dispatch(listPost());
+
           dispatch(listProduct());
      }, [dispatch]);
 
@@ -43,12 +50,20 @@ const Home = () => {
                                              nhà cung cấp. Nó cho phép nông dân để đăng nhập và giao
                                              tiếp với đại lý tương ứng.....
                                         </p>
-                                        <motion.button
-                                             whileTap={{ scale: 1.1 }}
-                                             className="shop__btn"
-                                        >
-                                             <Link to="/blog">Xem Thêm</Link>
-                                        </motion.button>
+                                        {!userInfo ? (
+                                             <>
+                                                  <br />
+                                                  <br />
+                                                  <Link className="shop__btn" to="/register">
+                                                       Tạo tài khoản
+                                                  </Link>
+                                             </>
+                                        ) : (
+                                             <>
+                                                  <br />
+                                                  <br />
+                                             </>
+                                        )}
                                    </div>
                               </Col>
                               <Col lg="6" md="6">
@@ -63,10 +78,10 @@ const Home = () => {
                               <Col lg="12" className="text-center mb-5">
                                    <h2 className="section__title">Bài Viết Nổi Bật</h2>
                               </Col>
-                              <FeaturePostList />
+                              <FeaturePostList data={posts} />
                               <div className="d-flex  justify-content-center">
                                    <motion.button whileTap={{ scale: 1.1 }} className="shop__btn">
-                                        <Link to="/blog">Xem Thêm</Link>
+                                        <Link to="/posts">Xem Thêm</Link>
                                    </motion.button>
                               </div>
                          </Row>

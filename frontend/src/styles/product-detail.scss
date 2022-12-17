@@ -1,3 +1,8 @@
+.avt-cus {
+     height: 35px;
+     width: 35px;
+     border-radius: 50%;
+}
 .product__details {
      margin-top: 70px;
      h2 {
@@ -14,6 +19,28 @@
      .product__price {
           font-size: 1.3rem;
           font-weight: 500;
+     }
+     .contact {
+          margin-top: 10px;
+          .sdt {
+               padding: 5px;
+               height: 40px;
+               border-radius: 5px;
+               background-color: #9acf9c;
+               text-align: center;
+               color: white;
+               font-weight: 600;
+          }
+          .email {
+               margin-left: 10px;
+               padding: 5px;
+               height: 40px;
+               border-radius: 5px;
+               background-color: #9acf9c;
+               text-align: center;
+               color: white;
+               font-weight: 600;
+          }
      }
 }
 .tab__wrapper {

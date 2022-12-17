@@ -1,0 +1,14 @@
+.wrapper {
+     display: inline-block;
+     width: 100%;
+}
+.containe {
+     display: flex;
+     margin-top: var(--default-layout-header-height);
+     padding: 0 0 0 0;
+}
+
+.content {
+     max-width: 100%;
+     flex: 1;
+}

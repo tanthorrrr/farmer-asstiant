@@ -25,6 +25,9 @@
      position: relative;
      overflow: hidden;
      cursor: pointer;
+     height: 100%;
+     width: 100%;
+     object-fit: cover;
      &:hover {
           .date-post {
                opacity: 1;
@@ -34,7 +37,7 @@
 
      .date-post {
           position: absolute;
-          top: -25px;
+          top: -60px;
           right: 0;
           color: white;
           padding: 0 10px;

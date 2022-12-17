@@ -1,0 +1,84 @@
+.container-post {
+     width: 800px;
+     display: flex;
+     margin: auto;
+     background-color: rgb(207, 213, 220);
+     border-radius: 10px;
+     position: relative;
+     height: auto;
+     margin-top: 30px;
+     .Post {
+          width: 100%;
+
+          .avatar-post {
+               margin: 10px;
+               border-radius: 50%;
+               width: 3rem;
+               height: 3rem;
+          }
+          img {
+               width: 100%;
+               object-fit: cover;
+               height: 450px;
+          }
+          input {
+               background-color: rgb(255, 255, 255);
+               border-radius: 10px;
+               padding: 7px 10px;
+               font-size: 1.2rem;
+               border: none;
+               outline: none;
+               width: 700px;
+          }
+          .postOption {
+               display: flex;
+               justify-content: space-around;
+               margin-top: 10px;
+               margin-bottom: 20px;
+               i {
+                    font-size: 1.2rem;
+               }
+          }
+          button {
+               padding: 5px 14px;
+               background-color: var(--primary-color);
+               color: white;
+               border-radius: 5px;
+               font-weight: 500;
+          }
+
+          .detail {
+               position: relative;
+               .name {
+                    font-size: 1.2rem;
+                    color: var(--primary-color);
+                    font-size: bold;
+               }
+               .actions {
+                    position: absolute;
+                    display: flex;
+                    right: 10px;
+                    top: 10px;
+                    font-size: 1.2rem;
+                    font-weight: bold;
+               }
+          }
+          .postReacts {
+               margin-top: 5px;
+               margin-bottom: 8px;
+               i {
+                    font-size: 1.2rem;
+               }
+          }
+          .info-flow {
+               justify-content: space-between;
+               display: flex;
+               border-bottom: 1px solid black;
+               div {
+                    padding: 5px 30px;
+                    font-size: 1rem;
+                    font-weight: 500;
+               }
+          }
+     }
+}

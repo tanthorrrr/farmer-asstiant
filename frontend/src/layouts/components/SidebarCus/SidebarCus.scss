@@ -1,0 +1,24 @@
+.containerCS {
+     display: flex;
+
+     .sidebar {
+          position: sticky;
+          width: 300px;
+          height: 100vh;
+          border-right: 1px solid black;
+          background-color: #0a1d37;
+          color: #d2c8c0;
+
+          ul {
+               li {
+                    padding: 10px;
+                    border-bottom: 1px solid #d2c8c0;
+                    font-size: 1.2rem;
+                    font-weight: 500;
+                    i {
+                         margin-right: 10px;
+                    }
+               }
+          }
+     }
+}

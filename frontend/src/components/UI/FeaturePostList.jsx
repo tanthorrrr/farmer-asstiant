@@ -4,14 +4,11 @@ import FeaturedPost from "./FeaturedPost";
 const featurePostList = ({ data }) => {
      return (
           <>
-               <FeaturedPost />
-               <FeaturedPost />
-               <FeaturedPost />
-               <FeaturedPost />
-               <FeaturedPost />
-               <FeaturedPost />
-               <FeaturedPost />
-               <FeaturedPost />
+               <>
+                    {data.map((data, index) => (
+                         <FeaturedPost data={data} key={index} />
+                    ))}
+               </>
           </>
      );
 };

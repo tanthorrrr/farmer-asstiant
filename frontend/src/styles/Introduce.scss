@@ -4,6 +4,12 @@
      background-size: cover;
      background-repeat: no-repeat;
      background-image: url("https://cdn.pixabay.com/photo/2016/11/23/15/20/pineapples-1853466_960_720.jpg");
+     .intro_content {
+          p {
+               margin-top: 5px;
+               color: #000;
+          }
+     }
 }
 .intro-img {
      position: relative;

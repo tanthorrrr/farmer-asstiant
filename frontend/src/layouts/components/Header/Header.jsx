@@ -9,11 +9,15 @@ import { Link, NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../redux/Actions/UserActions";
 // import Search from "../Search/Search";
-import logo from "../../../assets/images/logo.png";
-const nav_links = [
+import logo from "../../../assets/images/Farmer1.png";
+const nav_link_farmer = [
      {
           path: "/",
           display: "Trang Chủ",
+     },
+     {
+          path: "/posts",
+          display: "Bài Viết",
      },
      {
           path: "/products",
@@ -21,19 +25,38 @@ const nav_links = [
      },
      {
           path: "/blog",
+          display: "Bài Đăng",
+     },
+];
+const nav_link_agent = [
+     {
+          path: "/",
+          display: "Trang Chủ",
+     },
+     {
+          path: "/posts",
           display: "Bài Viết",
      },
      {
-          path: "/feedback",
-          display: "Phản Hồi",
+          path: "/products",
+          display: "Sản Phẩm",
+     },
+     {
+          path: "/blog",
+          display: "Bài Đăng",
+     },
+     {
+          path: "/notificationSMS",
+          display: "Thông Báo SMS",
      },
 ];
 const Header = () => {
      const menuRef = useRef(null);
      const userLogin = useSelector((state) => state.userLogin);
      const { userInfo } = userLogin;
-     const [isActive, setIsActive] = useState(false);
      const dispatch = useDispatch();
+     const [isActive, setIsActive] = useState(false);
+     console.log(userInfo);
      const menuToggle = () => {
           menuRef.current.classList.toggle("active__menu");
      };
@@ -47,24 +70,38 @@ const Header = () => {
                          <div className="nav_wrapper">
                               <Link className="logo" to={"/"}>
                                    <img alt="" src={logo} />
-                                   <div>
-                                        <h1>Farmer</h1>
-                                   </div>
                               </Link>
                               <div className="navication" ref={menuRef} onClick={menuToggle}>
                                    <ul className="menu">
-                                        {nav_links.map((item, index) => (
-                                             <li className="nav__item" key={index}>
-                                                  <NavLink
-                                                       className={(navClass) =>
-                                                            navClass.isActive ? "nav__active" : ""
-                                                       }
-                                                       to={item.path}
-                                                  >
-                                                       {item.display}
-                                                  </NavLink>
-                                             </li>
-                                        ))}
+                                        {(userInfo && userInfo.idRole === 3) || !userInfo
+                                             ? nav_link_farmer.map((item, index) => (
+                                                    <li className="nav__item" key={index}>
+                                                         <NavLink
+                                                              className={(navClass) =>
+                                                                   navClass.isActive
+                                                                        ? "nav__active"
+                                                                        : ""
+                                                              }
+                                                              to={item.path}
+                                                         >
+                                                              {item.display}
+                                                         </NavLink>
+                                                    </li>
+                                               ))
+                                             : nav_link_agent.map((item, index) => (
+                                                    <li className="nav__item" key={index}>
+                                                         <NavLink
+                                                              className={(navClass) =>
+                                                                   navClass.isActive
+                                                                        ? "nav__active"
+                                                                        : ""
+                                                              }
+                                                              to={item.path}
+                                                         >
+                                                              {item.display}
+                                                         </NavLink>
+                                                    </li>
+                                               ))}
                                    </ul>
                               </div>
 
@@ -112,9 +149,11 @@ const Header = () => {
                                                             {userInfo.firstname + userInfo.lastname}
                                                             <br />
                                                             <span>
-                                                                 {userInfo.idRole !== 1
-                                                                      ? "Nông Dân"
-                                                                      : "Thương Lái"}
+                                                                 {userInfo.idRole === 1
+                                                                      ? "admin"
+                                                                      : userInfo.idRole === 2
+                                                                      ? "Thương Lái"
+                                                                      : "Nông Dân"}
                                                             </span>
                                                        </h3>
                                                        {userInfo && userInfo.idRole === 1 ? (
@@ -135,18 +174,16 @@ const Header = () => {
                                                        ) : (
                                                             <ul>
                                                                  <li>
-                                                                      <i className="ri-profile-line"></i>
+                                                                      <i className="ri-settings-line"></i>
                                                                       <Link to="/profile">
-                                                                           Trang Cá Nhân
+                                                                           Quản Lý
                                                                       </Link>
                                                                  </li>
                                                                  <li>
                                                                       <i className="ri-settings-line"></i>
-                                                                      <Link> Quản Lý</Link>
-                                                                 </li>
-                                                                 <li>
-                                                                      <i className="ri-settings-line"></i>
-                                                                      <Link> Cài Đặt</Link>
+                                                                      <Link to={"/setting"}>
+                                                                           Cài Đặt
+                                                                      </Link>
                                                                  </li>
                                                                  <li>
                                                                       <i className="ri-logout-box-line"></i>
