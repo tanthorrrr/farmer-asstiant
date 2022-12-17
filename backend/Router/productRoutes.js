@@ -1,11 +1,34 @@
 import express from "express";
+const productRoute = express.Router();
 import asyncHandler from "express-async-handler";
 import { protect } from "../middleware/AuthMiddleware.js";
-
 import Product from "../models/ProductModels.js";
+import multer from "multer";
+import mongoose from "mongoose";
 
-const productRoute = express.Router();
-
+const storage = multer.diskStorage({
+     destination: function (req, file, cb) {
+          cb(null, "./uploads");
+     },
+     filename: function (req, file, cb) {
+          cb(null, new Date().toISOString().replace(/:/g, "-") + "-" + file.originalname);
+     },
+});
+const fileFilter = (req, file, cb) => {
+     //reject a file
+     if (file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
+          cb(null, true);
+     } else {
+          cb(null, false);
+     }
+};
+const upload = multer({
+     storage: storage,
+     limits: {
+          fieldSize: 1024 * 1024 * 5,
+     },
+     fileFilter: fileFilter,
+});
 //GET ALL RPODUCT
 productRoute.get(
      "/",
@@ -29,6 +52,68 @@ productRoute.get(
           }
      })
 );
+//Create new product
+productRoute.post(
+     "/",
+     protect,
+     // upload.single("image"),
+     asyncHandler(async (req, res, next) => {
+          // product.save().then((result) => {
+          //      console.log(result);
+          //      res.status(201).json({
+          //           message: "addproduct successfuly",
+          //      });
+          // });
+          const { name, type, price, shortDesc, description, image } = req.body;
+          const productExist = await Product.findOne({ name });
+          if (productExist) {
+               res.status(400);
+               throw new Error("Tên Sản Phẩm đã tồn tại");
+          } else {
+               const product = new Product({
+                    name,
+                    type,
+                    price,
+                    shortDesc,
+                    description,
+                    // image: req.file.path,
+                    image,
+                    idUser: req.user._id,
+               });
+               if (product) {
+                    const createdproduct = await product.save();
+                    res.status(201).json(createdproduct);
+               } else {
+                    res.status(400);
+                    throw new Error("không thành công");
+               }
+          }
+     })
+);
+//edit
+productRoute.put(
+     "/:id",
+     protect,
+     upload.single("image"),
+     asyncHandler(async (req, res, next) => {
+          const { name, type, price, shortDesc, description, image } = req.body;
+          const product = await Product.findById(req.params.id);
+          if (product) {
+               (product.name = name) || product.name,
+                    (product.type = type || product.type),
+                    (product.price = price || product.price),
+                    (product.shortDesc = shortDesc || product.shortDesc),
+                    (shortDesc.description = description || shortDesc.description),
+                    // image: req.file.path,
+                    (description.image = description || description.image);
+               const updateProduct = await product.save();
+               res.json(updateProduct);
+          } else {
+               res.status(404);
+               throw new Error("Không tim thấy sản phẩm");
+          }
+     })
+);
 
 // PRODUCT REVIEW
 productRoute.post(
@@ -44,7 +129,7 @@ productRoute.post(
                );
                if (alreadyReview) {
                     res.status(400);
-                    throw new Error("Product already Reviewed");
+                    throw new Error("Sản phẩm này bạn đã bình luận ");
                }
                const review = {
                     firstname: req.user.firstname,
@@ -67,4 +152,20 @@ productRoute.post(
           }
      })
 );
+//Delete product
+productRoute.delete(
+     "/:id",
+     protect,
+     asyncHandler(async (req, res) => {
+          const product = await Product.findById(req.params.id);
+          if (product) {
+               await product.remove();
+               res.json({ message: "Delete product successfuly" });
+          } else {
+               res.status(404);
+               throw new Error("Product not Found");
+          }
+     })
+);
+
 export default productRoute;

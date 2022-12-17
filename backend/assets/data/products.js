@@ -114,7 +114,22 @@ const products = [
 
           rating: 0,
           numReview: 0,
-          idUser: "638eea9cdb799c7241ebf0f1",
+          idUser: "638eea9cdb799c7241ebf0f2",
+     },
+     {
+          name: "việt quất ",
+          type: "ondoi",
+          image: "https://images.pexels.com/photos/1153655/pexels-photo-1153655.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+
+          price: 253,
+          shortDesc:
+               "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur iure quas illo voluptates labore tempore!",
+          description:
+               "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio nostrum accusantium iste, voluptas cumque provident! Consequatur officiis animi rem tempore voluptate cumque hic similique aperiam ut consectetur distinctio repudiandae quia quam quos, quas illo, iusto, necessitatibus odio veniam exercitationem quis voluptatibus debitis laboriosam! Esse debitis obcaecati blanditiis at impedit quibusdam!",
+
+          rating: 0,
+          numReview: 0,
+          idUser: "638eea9cdb799c7241ebf0f2",
      },
 ];
 
